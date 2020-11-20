@@ -3,7 +3,7 @@ import { PostModel } from "../../data/Post";
 
 const resolvers: IResolvers = {
   Query: {
-    getPosts: async () => {
+    list_all_posts: async () => {
       const data = await PostModel.find();
       return data;
     },

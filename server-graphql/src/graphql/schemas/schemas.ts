@@ -26,7 +26,7 @@ const typeDefs = gql`
     }
 
     type Query {
-        getPosts: [Post]
+        list_all_posts: [Post]
     }
 `;
 
