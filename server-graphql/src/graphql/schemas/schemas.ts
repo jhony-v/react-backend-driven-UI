@@ -1,33 +1,40 @@
 import { gql } from "apollo-server";
 
-const typeDefs = gql`
-    interface BaseUser {
-        avatar: String
-        username: String
-    }
+const schemas = gql`
+  type UserBasicProfile {
+    avatar: String
+    username: String
+  }
 
-    type UserPost implements BaseUser {
-        avatar: String
-        username: String
-    }
+  type Reaction {
+    type: String
+    text: String
+    me: Boolean
+  }
 
-    type Reaction {
-        type: String
-        text: String
-        me: Boolean
-    }
+  type Post {
+    user: UserBasicProfile
+    text: String
+    image: String
+    createdAt: String
+    reactions: [Reaction]
+  }
 
-    type Post {
-        user: UserPost
-        text: String
-        image: String
-        createdAt: String
-        reactions: [Reaction]
-    }
+  type PostCard {
+    component: String!
+    data: Post
+  }
 
-    type Query {
-        list_all_posts: [Post]
-    }
+  type PostAnnounceCard {
+    component: String!
+    data: UserBasicProfile
+  }
+
+  union DataMainPost = PostCard | PostAnnounceCard
+
+  type Query {
+    list_all_posts(skip: Int!, limit: Int!): [DataMainPost]
+  }
 `;
 
-export default typeDefs;
+export default schemas;

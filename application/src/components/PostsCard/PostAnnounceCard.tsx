@@ -6,12 +6,18 @@ const SUser = {
   Wrapper: styled.div({
     display: "flex",
     alignItems: "center",
-    margin: "10px 1em",
+    margin: "10px auto",
     flexDirection: "column",
+    padding:"10px",
+    borderRadius:"10px",
+    width: "95%",
+    backgroundColor: "rgba(0,0,0,.02)",
   }),
   Avatar: styled.img({
-    width: "45px",
-    height: "45px",
+    width: "105px",
+    height: "105px",
+    border:"4px solid rgb(30,130,230)",
+    padding:"5px",
     objectFit: "cover",
     borderRadius: "100%",
     marginBottom: "10px",
@@ -24,39 +30,15 @@ const SUser = {
   }),
 };
 
-const SList = {
-  Wrapper: styled.div({
-    width: "100%",
-    margin: "2em auto",
-    display: "flex",
-    overflowX: "scroll",
-    "&::-webkit-scrollbar": {
-      display: "none",
-    },
-  }),
-};
 
-const ItemPostAnnounceCard = (props: GraphTypes.UserType) => {
+const PostAnnounceCard = (props: GraphTypes.UserType) => {
   return (
     <SUser.Wrapper>
       <SUser.Avatar src={props.avatar} />
-      <SUser.Text>{props.fullName}</SUser.Text>
+      <SUser.Text>{props.username}</SUser.Text>
     </SUser.Wrapper>
   );
 };
 
-interface PostAnnounceCardProps {
-  users: GraphTypes.UserType[];
-}
-
-const PostAnnounceCard = (props: PostAnnounceCardProps) => {
-  return (
-    <SList.Wrapper>
-      {props.users.map((data, i) => (
-        <ItemPostAnnounceCard key={i} {...data} />
-      ))}
-    </SList.Wrapper>
-  );
-};
 
 export default PostAnnounceCard;

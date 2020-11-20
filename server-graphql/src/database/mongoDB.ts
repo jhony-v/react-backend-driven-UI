@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { PostModel } from "../data/Post";
+import { PostModel } from "./models/Post";
 import posts from "../mocks/posts";
 
 const pathMongoDB = "mongodb://localhost:27017/social-posts";

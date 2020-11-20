@@ -6,7 +6,7 @@ export namespace GraphTypes {
 
   export interface UserType {
     avatar?: string;
-    fullName?: string;
+    username?: string;
   }
 
   export interface ReactionType {
@@ -21,5 +21,25 @@ export namespace GraphTypes {
     createdAt?: string;
     reactions?: ReactionType[];
     user?: UserType;
+  }
+
+  export interface NameComponent {
+    component: string;
+  }
+
+  export interface PostAnnounceCard extends NameComponent {
+    data: UserType;
+  }
+
+  export interface PostCard extends NameComponent {
+    data: PostType;
+  }
+
+  export interface ListAllPostsVariables {
+    skip: number;
+    limit: number;
+  }
+  export interface ListAllPostsData {
+    list_all_posts: PostCard[] & PostAnnounceCard[];
   }
 }

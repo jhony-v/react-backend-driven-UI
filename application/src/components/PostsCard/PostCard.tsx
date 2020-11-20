@@ -6,10 +6,10 @@ const S = {
   MainWrapper: styled.div({
     margin: "1em auto",
     borderRadius: "10px",
-    width: "95%",
     padding: "20px",
     display: "flex",
     flexDirection: "column",
+    width: "95%",
     backgroundColor: "rgba(0,0,0,.02)",
   }),
   Image: styled.img({
@@ -20,7 +20,10 @@ const S = {
     backgroundColor: "rgba(0,0,0,.2)",
   }),
   TextPost: styled.p({
-    color: "rgb(30,30,30)",
+    color: "rgb(60,60,60)",
+    fontSize:"13px",
+    fontWeight:"bold",
+    lineHeight:"23px"
   }),
   TextDate: styled.span({
     fontSize: "11px",
@@ -37,6 +40,7 @@ const S = {
     width: "40px",
     height: "40px",
     borderRadius: "100%",
+    marginRight:"10px",
   }),
   UserFullName: styled.div({
     fontWeight: "bold",
@@ -49,11 +53,11 @@ const PostCard = (props: PostCardTypes) => {
   return (
     <S.MainWrapper>
       <S.UserWrapper>
-        <S.UserAvatar src={props.user?.avatar} />
-        <S.UserFullName>{props.user?.fullName}</S.UserFullName>
+        <S.UserAvatar src={props.user?.avatar} draggable="false" />
+        <S.UserFullName>{props.user?.username}</S.UserFullName>
       </S.UserWrapper>
-      <S.Image src={props.image} />
-      <S.TextDate>{new Date(props.createdAt!).toString()}</S.TextDate>
+      <S.Image src={props.image} draggable="false" />
+      <S.TextDate>{new Date(Number(props.createdAt)).toLocaleString()}</S.TextDate>
       <S.TextPost>{props.text}</S.TextPost>
     </S.MainWrapper>
   );
