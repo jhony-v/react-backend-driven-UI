@@ -1,9 +1,11 @@
+import { motion } from "framer-motion";
 import React from "react";
 import styled from "styled-components";
 import { GraphTypes } from "../../@types";
+import useDeleteItem from "../../hooks/useDeleteItem";
 
 const SUser = {
-  Wrapper: styled.div({
+  Wrapper: styled(motion.div)({
     display: "flex",
     alignItems: "center",
     margin: "10px auto",
@@ -11,6 +13,7 @@ const SUser = {
     padding:"10px",
     borderRadius:"10px",
     width: "95%",
+    cursor:"pointer",
     backgroundColor: "rgba(0,0,0,.02)",
   }),
   Avatar: styled.img({
@@ -31,10 +34,16 @@ const SUser = {
 };
 
 
-const PostAnnounceCard = (props: GraphTypes.UserType) => {
+type PostAnnounceCardProps = {
+  onClick : () => void;
+} & GraphTypes.UserType;
+
+const PostAnnounceCard = (props: PostAnnounceCardProps) => {
+  const { deleted, ...restProps } = useDeleteItem();
+  if(deleted) return null;
   return (
-    <SUser.Wrapper>
-      <SUser.Avatar src={props.avatar} />
+    <SUser.Wrapper {...restProps}  >
+      <SUser.Avatar src={props.avatar}  draggable="false" />
       <SUser.Text>{props.username}</SUser.Text>
     </SUser.Wrapper>
   );

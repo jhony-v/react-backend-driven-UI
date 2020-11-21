@@ -1,15 +1,18 @@
+import { motion } from "framer-motion";
 import React from "react";
 import styled from "styled-components";
 import { GraphTypes } from "../../@types";
+import useDeleteItem from "../../hooks/useDeleteItem";
 
 const S = {
-  MainWrapper: styled.div({
+  MainWrapper: styled(motion.div)({
     margin: "1em auto",
     borderRadius: "10px",
     padding: "20px",
     display: "flex",
     flexDirection: "column",
     width: "95%",
+    cursor:"pointer",
     backgroundColor: "rgba(0,0,0,.02)",
   }),
   Image: styled.img({
@@ -47,11 +50,15 @@ const S = {
   }),
 };
 
-interface PostCardTypes extends GraphTypes.PostType {}
+interface PostCardTypes extends GraphTypes.PostType {
+  onClick : () => void;
+}
 
 const PostCard = (props: PostCardTypes) => {
+  const { deleted, ...restProps } = useDeleteItem();
+  if(deleted) return null;
   return (
-    <S.MainWrapper>
+    <S.MainWrapper {...restProps}>
       <S.UserWrapper>
         <S.UserAvatar src={props.user?.avatar} draggable="false" />
         <S.UserFullName>{props.user?.username}</S.UserFullName>
